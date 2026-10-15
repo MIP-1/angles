@@ -13,6 +13,10 @@
 (function (root) {
   var OPPOSITE_QUAD = { UL: "LR", LR: "UL", UR: "LL", LL: "UR" };
   var SIDE_WORD = { above: "أعلى", below: "أسفل", left: "يسار", right: "يمين" };
+  // Isolate a Latin line letter so RTL order never scrambles (textContent-safe <bdi>).
+  function L(s) { return "\u2066" + s + "\u2069"; }
+  // Single source for crossing display names: ids A-D never reach the user.
+  function vName(data, v) { return (data.vertexNames && data.vertexNames[v]) || v; }
 
   function pairKey(x, y) { return Math.min(x, y) + "," + Math.max(x, y); }
 
@@ -49,12 +53,12 @@
     if (px.vertex === py.vertex) {
       if (OPPOSITE_QUAD[px.quad] === py.quad) {
         return neutral("vertical",
-          "متقابلتان بالرأس عند التقاطع " + px.vertex +
+          "متقابلتان بالرأس عند " + vName(data, px.vertex) +
           " — تشتركان في الرأس فقط، وهي ليست من العلاقات الأربع المسماة.",
           { vertex: px.vertex });
       }
       return neutral("adjacent",
-        "متجاورتان عند التقاطع " + px.vertex +
+        "متجاورتان عند " + vName(data, px.vertex) +
         " — تشتركان في ضلع، وهي ليست من العلاقات الأربع المسماة.",
         { vertex: px.vertex });
     }
@@ -96,12 +100,12 @@
       var sideTxt = SIDE_WORD[f.pa.side] || f.pa.side;
       if (f.pa.side === f.pb.side && f.pa.zone === "ext" && f.pb.zone === "ext") {
         return neutral("sameSideExterior",
-          "على الجهة نفسها من القاطع " + f.config + " (" + sideTxt +
+          "على الجهة نفسها من القاطع " + L(f.config) + " (" + sideTxt +
           ") وكلتاهما خارجية — لا علاقة مسماة لهذه الحالة في المنهج.",
           { config: f.config });
       }
       return neutral("oppositeMixed",
-        "على جهتين مختلفتين من القاطع " + f.config +
+        "على جهتين مختلفتين من القاطع " + L(f.config) +
         " وإحداهما داخلية والأخرى خارجية — لا علاقة مسماة لهذه الحالة في المنهج.",
         { config: f.config });
     }
@@ -110,7 +114,7 @@
     for (var j = 1; j < named.length; j++) {
       if (named[j].relation !== first) {
         return neutral("conflict",
-          "تعارض بين الإعدادات (" + named[0].config + " و" + named[j].config +
+          "تعارض بين الإعدادات (" + L(named[0].config) + " و" + L(named[j].config) +
           ") — توقف بدون تخمين.");
       }
     }
