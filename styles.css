@@ -196,3 +196,5 @@ main { padding: 12px 16px 32px; max-width: 720px; margin: 0 auto; }
 }
 #result.ok { border-color: var(--accent); color: var(--primary-ink); }
 #result.err { border-color: var(--error); color: var(--error); }
+#result.info { border-color: #6B7280; color: #4B5563; }
+html[data-theme="dark"] #result.info { border-color: #9CA3AF; color: #D1D5DB; }

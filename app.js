@@ -57,12 +57,15 @@
       return;
     }
     var out = window.AnglesLogic.classifyPair(chosen[0], chosen[1], DATA);
-    if (out.relation) {
+    if (out.kind === "relation") {
       box.className = "ok";
       box.textContent = "الزاوية " + chosen[0] + " والزاوية " + chosen[1] + ": " + out.relation;
-    } else {
+    } else if (out.kind === "error") {
       box.className = "err";
-      box.textContent = "خطأ: " + DATA.errorMessage;
+      box.textContent = "خطأ: " + out.error;
+    } else {
+      box.className = "info";
+      box.textContent = out.message;
     }
   }
 
