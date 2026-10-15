@@ -1,0 +1,198 @@
+/* Palette measured from project images:
+ * primary blue #0072BC (figure.png lines/arrows),
+ * secondary teal #2090A0 + accent green #80A020 (logo.png).
+ * Light: white bg, black text. Dark: black bg, white text; blue/teal/green same.
+ * Error red #C51F24 (textbook title).
+ * Every box/container is rounded (radius var). Text outline inverts with text color:
+ * black text -> white outline, white text -> black outline. Offline. */
+
+:root {
+  --primary: #0072BC;
+  --primary-ink: #0072BC; /* text-safe blue: same as primary in light mode */
+  --secondary: #2090A0;
+  --accent: #80A020;
+  --ink: #000000;
+  --bg: #FFFFFF;
+  --surface: #FFFFFF;
+  --error: #C51F24;
+  --stroke: #FFFFFF; /* outline for black (ink) text */
+  --radius: 10px;
+  --pill: 999px;
+  --select: #F5A623; /* golden/orange selection highlight */
+  --btn-bg: var(--primary);
+  --btn-ink: #FFFFFF;
+  --btn-stroke: #000000;
+}
+
+html[data-theme="dark"] {
+  --bg: #000000;
+  --surface: #000000;
+  --ink: #FFFFFF;
+  --stroke: #000000; /* outline for white (ink) text */
+  --primary-ink: #FFFFFF; /* all dim blue text -> solid white in dark */
+  --error: #FF7A70; /* lighter red, legible on black */
+  --btn-bg: #FFFFFF;
+  --btn-ink: #000000;
+  --btn-stroke: #FFFFFF;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.6;
+  opacity: 1;
+  -webkit-text-stroke: 0.5px var(--stroke);
+}
+
+.sheet-header {
+  border-bottom: 3px solid var(--primary);
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 12px 16px;
+  display: grid;
+  gap: 8px;
+  background: var(--surface);
+}
+
+.head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.person {
+  border: 1px solid var(--secondary);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  min-width: 150px;
+  text-align: center;
+  background: var(--surface);
+  -webkit-text-stroke: 0.5px var(--stroke);
+}
+
+.person .label { color: var(--primary-ink); font-size: 1.25rem; font-weight: 700; opacity: 1; }
+
+.person strong { font-size: 1.3rem; font-weight: 700; }
+
+.logo {
+  height: 84px;
+  width: auto;
+  border-radius: var(--radius);
+}
+
+h1 { color: var(--primary-ink); font-size: 2rem; font-weight: 800; margin: 4px 0; text-align: center; opacity: 1; }
+
+#themeToggle {
+  justify-self: center;
+  background: var(--btn-bg);
+  color: var(--btn-ink);
+  -webkit-text-stroke: 0.5px var(--btn-stroke);
+  border: none;
+  border-radius: var(--pill);
+  padding: 10px 26px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 48px;
+  opacity: 1;
+}
+#themeToggle:hover { background: var(--secondary); }
+
+main { padding: 12px 16px 32px; max-width: 720px; margin: 0 auto; }
+
+.hint { color: var(--primary-ink); font-size: 1.3rem; font-weight: 700; opacity: 1; }
+
+#figure {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--secondary);
+  border-radius: var(--radius);
+  background: var(--surface);
+  touch-action: manipulation;
+}
+
+.beam { stroke: var(--primary); stroke-width: 4; }
+.linelabel {
+  fill: var(--ink);
+  stroke: var(--stroke);
+  stroke-width: 1px;
+  paint-order: stroke fill;
+  font-size: 38px;
+  font-weight: 700;
+  font-style: italic;
+  opacity: 1;
+}
+.numlabel {
+  fill: var(--ink);
+  stroke: var(--stroke);
+  stroke-width: 1px;
+  paint-order: stroke fill;
+  font-size: 34px;
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+  opacity: 1;
+}
+
+.angle { cursor: pointer; pointer-events: all; }
+.angle circle {
+  fill: var(--surface);
+  fill-opacity: 0.01;
+  stroke: none;
+}
+.angle:focus { outline: none; }
+.angle:focus circle { fill-opacity: 0.01; stroke: var(--secondary); stroke-width: 3; }
+.angle.selected circle { fill: var(--select); fill-opacity: 1; stroke: none; }
+.angle.selected text { fill: #000000; stroke: none; }
+.angle.paired circle { fill: var(--accent); fill-opacity: 1; stroke: none; }
+.angle.paired text { fill: #000000; stroke: none; }
+
+.selection-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px solid var(--secondary);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+}
+
+#selection { font-size: 1.25rem; font-weight: 700; opacity: 1; -webkit-text-stroke: 0.5px var(--stroke); }
+
+#reset {
+  background: var(--btn-bg);
+  color: var(--btn-ink);
+  -webkit-text-stroke: 0.5px var(--btn-stroke);
+  border: none;
+  border-radius: var(--pill);
+  padding: 10px 22px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 48px;
+  opacity: 1;
+}
+#reset:hover { background: var(--secondary); }
+
+#result {
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: var(--radius);
+  font-size: 1.5rem;
+  font-weight: 800;
+  border: 2px solid var(--accent);
+  background: var(--surface);
+  min-height: 3em;
+  opacity: 1;
+  -webkit-text-stroke: 0.5px var(--stroke);
+}
+#result.ok { border-color: var(--accent); color: var(--primary-ink); }
+#result.err { border-color: var(--error); color: var(--error); }

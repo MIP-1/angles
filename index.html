@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الزوايا — تحديد العلاقة بين زاويتين</title>
+<script>
+/* Apply saved theme before CSS loads (no flash). Offline-safe. */
+try {
+  if (localStorage.getItem("angles-theme") === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+  }
+} catch (e) {}
+</script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="sheet-header">
+  <div class="head-row">
+    <div class="person student"><span class="label">اسم الطالب:</span><br><strong>مصطفى عبد الباسط زهرا</strong></div>
+    <img src="logo.png" alt="شعار مدارس المتقدمة" class="logo">
+    <div class="person teacher"><span class="label">اسم المعلم:</span><br><strong>محمد عبد الله</strong></div>
+  </div>
+  <h1>تحديد العلاقة بين زاويتين</h1>
+  <button id="themeToggle" type="button">الوضع الداكن</button>
+</header>
+
+<main>
+  <p class="hint">المس زاويتين من الشكل لعرض العلاقة بينهما.</p>
+
+  <!-- Figure redrawn from figure.png measurements (763x644 space).
+       Crossings: A=t∩r (288,238), B=t∩s (455,238), C=r∩v (240,531), D=s∩v (502,432).
+       Tap circles (r=24) sit on the measured numeral positions. -->
+  <svg id="figure" viewBox="0 0 763 644" role="group" aria-label="الشكل الهندسي: المستقيمان r و s يقطعهما القاطع t، والمستقيم v">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#0072BC" />
+      </marker>
+    </defs>
+    <!-- Lines (blue, arrows both ends, as in figure.png) -->
+    <line x1="123" y1="238" x2="647" y2="238" class="beam" marker-start="url(#arr)" marker-end="url(#arr)" />
+    <line x1="316" y1="66" x2="222" y2="641" class="beam" marker-start="url(#arr)" marker-end="url(#arr)" />
+    <line x1="408" y1="47" x2="548" y2="620" class="beam" marker-start="url(#arr)" marker-end="url(#arr)" />
+    <line x1="125" y1="575" x2="646" y2="378" class="beam" marker-start="url(#arr)" marker-end="url(#arr)" />
+    <!-- Line labels (as in figure.png) -->
+    <text x="105" y="218" class="linelabel">t</text>
+    <text x="322" y="40" class="linelabel" text-anchor="middle">r</text>
+    <text x="411" y="28" class="linelabel" text-anchor="middle">s</text>
+    <text x="136" y="550" class="linelabel" text-anchor="middle">v</text>
+    <!-- Tappable angles: invisible circle + black numeral -->
+    <g class="angle" data-angle="1" tabindex="0" role="button" aria-label="الزاوية 1">
+      <circle cx="271" cy="197" r="24"/><text x="271" y="197" class="numlabel" dy=".35em">1</text>
+    </g>
+    <g class="angle" data-angle="2" tabindex="0" role="button" aria-label="الزاوية 2">
+      <circle cx="319" cy="197" r="24"/><text x="319" y="197" class="numlabel" dy=".35em">2</text>
+    </g>
+    <g class="angle" data-angle="5" tabindex="0" role="button" aria-label="الزاوية 5">
+      <circle cx="310" cy="267" r="24"/><text x="310" y="267" class="numlabel" dy=".35em">5</text>
+    </g>
+    <g class="angle" data-angle="3" tabindex="0" role="button" aria-label="الزاوية 3">
+      <circle cx="416" cy="197" r="24"/><text x="416" y="197" class="numlabel" dy=".35em">3</text>
+    </g>
+    <g class="angle" data-angle="4" tabindex="0" role="button" aria-label="الزاوية 4">
+      <circle cx="476" cy="197" r="24"/><text x="476" y="197" class="numlabel" dy=".35em">4</text>
+    </g>
+    <g class="angle" data-angle="6" tabindex="0" role="button" aria-label="الزاوية 6">
+      <circle cx="487" cy="267" r="24"/><text x="487" y="267" class="numlabel" dy=".35em">6</text>
+    </g>
+    <g class="angle" data-angle="7" tabindex="0" role="button" aria-label="الزاوية 7">
+      <circle cx="273" cy="483" r="24"/><text x="273" y="483" class="numlabel" dy=".35em">7</text>
+    </g>
+    <g class="angle" data-angle="10" tabindex="0" role="button" aria-label="الزاوية 10">
+      <circle cx="196" cy="582" r="24"/><text x="196" y="582" class="numlabel" dy=".35em">10</text>
+    </g>
+    <g class="angle" data-angle="8" tabindex="0" role="button" aria-label="الزاوية 8">
+      <circle cx="469" cy="406" r="24"/><text x="469" y="406" class="numlabel" dy=".35em">8</text>
+    </g>
+    <g class="angle" data-angle="9" tabindex="0" role="button" aria-label="الزاوية 9">
+      <circle cx="517" cy="386" r="24"/><text x="517" y="386" class="numlabel" dy=".35em">9</text>
+    </g>
+    <g class="angle" data-angle="11" tabindex="0" role="button" aria-label="الزاوية 11">
+      <circle cx="477" cy="478" r="24"/><text x="477" y="478" class="numlabel" dy=".35em">11</text>
+    </g>
+    <g class="angle" data-angle="12" tabindex="0" role="button" aria-label="الزاوية 12">
+      <circle cx="541" cy="451" r="24"/><text x="541" y="451" class="numlabel" dy=".35em">12</text>
+    </g>
+  </svg>
+
+  <div class="selection-row">
+    <div id="selection">لم تُختر أي زاوية بعد.</div>
+    <button id="reset" type="button">مسح الاختيار</button>
+  </div>
+
+  <div id="result" aria-live="polite"></div>
+</main>
+
+<!-- Offline fallback copy of data.json (canonical source is www/data.json).
+     Used only when fetch('data.json') fails, e.g. file:// protocol. -->
+<script type="application/json" id="angles-data-fallback">
+{"angles": {"1": "الزاوية 1 — أعلى يسار A", "10": "الزاوية 10 — أسفل يسار C", "11": "الزاوية 11 — أسفل يسار D", "12": "الزاوية 12 — أسفل يمين D", "2": "الزاوية 2 — أعلى يمين A", "3": "الزاوية 3 — أعلى يسار B", "4": "الزاوية 4 — أعلى يمين B", "5": "الزاوية 5 — أسفل يمين A", "6": "الزاوية 6 — أسفل يمين B", "7": "الزاوية 7 — أعلى يمين C", "8": "الزاوية 8 — أعلى يسار D", "9": "الزاوية 9 — أعلى يمين D"}, "configs": [{"id": "t", "sides": "above/below", "transversal": "t", "vertices": {"A": "t∩r", "B": "t∩s"}}, {"id": "r", "sides": "left/right of r", "transversal": "r", "vertices": {"A": "r∩t", "C": "r∩v"}}, {"id": "s", "sides": "left/right of s", "transversal": "s", "vertices": {"B": "s∩t", "D": "s∩v"}}, {"id": "v", "sides": "above/below v", "transversal": "v", "vertices": {"C": "v∩r", "D": "v∩s"}}], "errorMessage": "حالة غير مدروسة في المنهج", "overrides": {"4,11": null, "4,12": "متبادلتان خارجياً"}, "positions": {"1": {"r": {"side": "left", "vertex": "A", "zone": "ext"}, "t": {"side": "above", "vertex": "A", "zone": "ext"}}, "10": {"r": {"side": "left", "vertex": "C", "zone": "ext"}, "v": {"side": "below", "vertex": "C", "zone": "ext"}}, "11": {"s": {"side": "left", "vertex": "D", "zone": "ext"}, "v": {"side": "below", "vertex": "D", "zone": "int"}}, "12": {"s": {"side": "right", "vertex": "D", "zone": "ext"}, "v": {"side": "below", "vertex": "D", "zone": "ext"}}, "2": {"r": {"side": "right", "vertex": "A", "zone": "ext"}, "t": {"side": "above", "vertex": "A", "zone": "int"}}, "3": {"s": {"side": "left", "vertex": "B", "zone": "ext"}, "t": {"side": "above", "vertex": "B", "zone": "int"}}, "4": {"s": {"side": "right", "vertex": "B", "zone": "ext"}, "t": {"side": "above", "vertex": "B", "zone": "ext"}}, "5": {"r": {"side": "right", "vertex": "A", "zone": "int"}, "t": {"side": "below", "vertex": "A", "zone": "int"}}, "6": {"s": {"side": "right", "vertex": "B", "zone": "int"}, "t": {"side": "below", "vertex": "B", "zone": "ext"}}, "7": {"r": {"side": "right", "vertex": "C", "zone": "int"}, "v": {"side": "above", "vertex": "C", "zone": "int"}}, "8": {"s": {"side": "left", "vertex": "D", "zone": "int"}, "v": {"side": "above", "vertex": "D", "zone": "int"}}, "9": {"s": {"side": "right", "vertex": "D", "zone": "int"}, "v": {"side": "above", "vertex": "D", "zone": "ext"}}}, "relations": {"alternateExterior": "متبادلتان خارجياً", "alternateInterior": "متبادلتان داخلياً", "consecutive": "متحالفتان", "corresponding": "متناظرتان"}, "source": "Positions measured from figure.png (A=t∩r, B=t∩s, C=r∩v, D=s∩v). Textbook general rules applied per setup. Explicit overrides win: 4&11=Error, 4&12=alternateExterior."}
+</script>
+<script src="logic.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
